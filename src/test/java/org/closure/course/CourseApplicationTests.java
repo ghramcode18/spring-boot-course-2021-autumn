@@ -35,7 +35,7 @@ class CourseApplicationTests {
 	
 	@Test
 	@WithMockUser(username = "admin", password = "admin@123", roles = "ADMIN")
-	public void mytest1() throws Exception {
+	public void basicAuthTest() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/admin")).andExpect((e) -> {
 			assertEquals(200, e.getResponse().getStatus());
 		});
