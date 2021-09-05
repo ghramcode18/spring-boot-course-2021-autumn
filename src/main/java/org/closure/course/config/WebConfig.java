@@ -1,6 +1,7 @@
 package org.closure.course.config;
 
 import org.closure.course.filters.JwtRequestFilter;
+import org.closure.course.services.JwtUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -61,6 +62,11 @@ public class WebConfig extends WebSecurityConfigurerAdapter{
 
 		// Add a filter to validate the tokens with every request
 		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+	}
+
+	@Bean
+	public UserDetailsService userDetailsService(){
+		return new JwtUserDetailsService();
 	}
 
 }
