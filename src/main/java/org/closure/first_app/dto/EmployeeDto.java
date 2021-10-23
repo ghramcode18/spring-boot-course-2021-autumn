@@ -1,36 +1,19 @@
-package org.closure.first_app.entity;
+package org.closure.first_app.dto;
 
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import org.closure.first_app.model.UserModel;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
-
-@Entity
-@JsonInclude(value = Include.NON_NULL)
-@Table(name = "employee")
-public class Employee {
-    @Id
-    @GeneratedValue
+public class EmployeeDto {
     Integer id;
     String salary;
-    @Column(name = "working_hours")
     int workingHours;
+    UserModel user;
 
-    @OneToOne(optional = false,targetEntity = User.class)
-    User user;
-
-    public Employee() {
+    public EmployeeDto() {
     }
 
-    public Employee(Integer id, String salary, int workingHours, User user) {
+    public EmployeeDto(Integer id, String salary, int workingHours, UserModel user) {
         this.id = id;
         this.salary = salary;
         this.workingHours = workingHours;
@@ -61,30 +44,30 @@ public class Employee {
         this.workingHours = workingHours;
     }
 
-    public User getUser() {
+    public UserModel getUser() {
         return this.user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
 
-    public Employee id(Integer id) {
+    public EmployeeDto id(Integer id) {
         setId(id);
         return this;
     }
 
-    public Employee salary(String salary) {
+    public EmployeeDto salary(String salary) {
         setSalary(salary);
         return this;
     }
 
-    public Employee workingHours(int workingHours) {
+    public EmployeeDto workingHours(int workingHours) {
         setWorkingHours(workingHours);
         return this;
     }
 
-    public Employee user(User user) {
+    public EmployeeDto user(UserModel user) {
         setUser(user);
         return this;
     }
@@ -93,11 +76,11 @@ public class Employee {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof Employee)) {
+        if (!(o instanceof EmployeeDto)) {
             return false;
         }
-        Employee employee = (Employee) o;
-        return Objects.equals(id, employee.id) && Objects.equals(salary, employee.salary) && workingHours == employee.workingHours && Objects.equals(user, employee.user);
+        EmployeeDto employeeDto = (EmployeeDto) o;
+        return Objects.equals(id, employeeDto.id) && Objects.equals(salary, employeeDto.salary) && workingHours == employeeDto.workingHours && Objects.equals(user, employeeDto.user);
     }
 
     @Override
@@ -114,5 +97,6 @@ public class Employee {
             ", user='" + getUser() + "'" +
             "}";
     }
+
 
 }

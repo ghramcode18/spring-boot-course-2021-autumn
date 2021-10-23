@@ -1,42 +1,26 @@
-package org.closure.first_app.entity;
+package org.closure.first_app.dto;
 
 import java.util.Date;
 import java.util.Objects;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-@Entity
-@Table(name = "user")
-public class User {
-    @Id
-    @GeneratedValue
-    Integer id;
+import org.closure.first_app.model.EmployeeModel;
 
+public class UserDto {
+    Integer id;
     String name;
-    @Column(unique = true)
     String email;
     String password;
-    @Column(name = "created_at",updatable = false)
     Date createAt;
-
-    @OneToOne(optional = true,targetEntity = Employee.class)
     @JsonInclude(value = Include.NON_NULL)
-    Employee employee; 
+    EmployeeModel employee; 
 
-
-    public User() {
+    public UserDto() {
     }
 
-    public User(Integer id, String name, String email, String password, Date createAt, Employee employee) {
+    public UserDto(Integer id, String name, String email, String password, Date createAt, EmployeeModel employee) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -85,40 +69,40 @@ public class User {
         this.createAt = createAt;
     }
 
-    public Employee getEmployee() {
+    public EmployeeModel getEmployee() {
         return this.employee;
     }
 
-    public void setEmployee(Employee employee) {
+    public void setEmployee(EmployeeModel employee) {
         this.employee = employee;
     }
 
-    public User id(Integer id) {
+    public UserDto id(Integer id) {
         setId(id);
         return this;
     }
 
-    public User name(String name) {
+    public UserDto name(String name) {
         setName(name);
         return this;
     }
 
-    public User email(String email) {
+    public UserDto email(String email) {
         setEmail(email);
         return this;
     }
 
-    public User password(String password) {
+    public UserDto password(String password) {
         setPassword(password);
         return this;
     }
 
-    public User createAt(Date createAt) {
+    public UserDto createAt(Date createAt) {
         setCreateAt(createAt);
         return this;
     }
 
-    public User employee(Employee employee) {
+    public UserDto employee(EmployeeModel employee) {
         setEmployee(employee);
         return this;
     }
@@ -127,11 +111,11 @@ public class User {
     public boolean equals(Object o) {
         if (o == this)
             return true;
-        if (!(o instanceof User)) {
+        if (!(o instanceof UserDto)) {
             return false;
         }
-        User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(createAt, user.createAt) && Objects.equals(employee, user.employee);
+        UserDto userDto = (UserDto) o;
+        return Objects.equals(id, userDto.id) && Objects.equals(name, userDto.name) && Objects.equals(email, userDto.email) && Objects.equals(password, userDto.password) && Objects.equals(createAt, userDto.createAt) && Objects.equals(employee, userDto.employee);
     }
 
     @Override
@@ -150,6 +134,5 @@ public class User {
             ", employee='" + getEmployee() + "'" +
             "}";
     }
-
 
 }
