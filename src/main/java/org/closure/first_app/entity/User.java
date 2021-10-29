@@ -1,48 +1,47 @@
 package org.closure.first_app.entity;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @Entity
 @Table(name = "user")
 public class User {
+
     @Id
     @GeneratedValue
     Integer id;
-
     String name;
-    @Column(unique = true)
     String email;
     String password;
-    @Column(name = "created_at",updatable = false)
-    Date createAt;
 
-    @OneToOne(optional = true,targetEntity = Employee.class)
-    @JsonInclude(value = Include.NON_NULL)
-    Employee employee; 
+    @OneToMany(mappedBy = "writer")
+    List<Article> articles = new ArrayList<>();
 
+    @ManyToMany
+    @JoinTable(name = "purchasers_and_products", joinColumns = { @JoinColumn(name = "uid") }, inverseJoinColumns = {
+            @JoinColumn(name = "pid") })
+    List<Product> items = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Integer id, String name, String email, String password, Date createAt, Employee employee) {
+    public User(Integer id, String name, String email, String password, List<Article> articles, List<Product> items) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.createAt = createAt;
-        this.employee = employee;
+        this.articles = articles;
+        this.items = items;
     }
 
     public Integer getId() {
@@ -77,20 +76,20 @@ public class User {
         this.password = password;
     }
 
-    public Date getCreateAt() {
-        return this.createAt;
+    public List<Article> getArticles() {
+        return this.articles;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setArticles(List<Article> articles) {
+        this.articles = articles;
     }
 
-    public Employee getEmployee() {
-        return this.employee;
+    public List<Product> getItems() {
+        return this.items;
     }
 
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setItems(List<Product> items) {
+        this.items = items;
     }
 
     public User id(Integer id) {
@@ -113,13 +112,13 @@ public class User {
         return this;
     }
 
-    public User createAt(Date createAt) {
-        setCreateAt(createAt);
+    public User articles(List<Article> articles) {
+        setArticles(articles);
         return this;
     }
 
-    public User employee(Employee employee) {
-        setEmployee(employee);
+    public User items(List<Product> items) {
+        setItems(items);
         return this;
     }
 
@@ -131,25 +130,21 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email) && Objects.equals(password, user.password) && Objects.equals(createAt, user.createAt) && Objects.equals(employee, user.employee);
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(email, user.email)
+                && Objects.equals(password, user.password) && Objects.equals(articles, user.articles)
+                && Objects.equals(items, user.items);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, email, password, createAt, employee);
+        return Objects.hash(id, name, email, password, articles, items);
     }
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", password='" + getPassword() + "'" +
-            ", createAt='" + getCreateAt() + "'" +
-            ", employee='" + getEmployee() + "'" +
-            "}";
+        return "{" + " id='" + getId() + "'" + ", name='" + getName() + "'" + ", email='" + getEmail() + "'"
+                + ", password='" + getPassword() + "'" + ", articles='" + getArticles() + "'" + ", items='" + getItems()
+                + "'" + "}";
     }
-
 
 }
