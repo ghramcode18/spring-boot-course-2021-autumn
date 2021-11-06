@@ -6,12 +6,8 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,22 +22,18 @@ import lombok.With;
 @AllArgsConstructor
 @With
 @Entity
-@Table(name = "user")
-public class User {
-
+@Table(name = "waiter")
+public class Waiter {
     @Id
     @GeneratedValue
     Integer id;
     String name;
+    String img;
     Integer phone;
-    double bill;
-   
-    @ManyToMany
-    @JoinTable(name = "user_meals",joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "mid")})
-    List<Meal> meals = new ArrayList<>();
 
-    @ManyToOne
-    Waiter waiter;
+
+    @OneToMany(mappedBy = "waiter")
+    List<User> users = new ArrayList<>();
 
 
 }

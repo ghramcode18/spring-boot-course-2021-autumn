@@ -6,8 +6,6 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -26,22 +24,25 @@ import lombok.With;
 @AllArgsConstructor
 @With
 @Entity
-@Table(name = "user")
-public class User {
-
+@Table(name = "meal")
+public class Meal {
     @Id
     @GeneratedValue
     Integer id;
     String name;
-    Integer phone;
-    double bill;
-   
-    @ManyToMany
-    @JoinTable(name = "user_meals",joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "mid")})
-    List<Meal> meals = new ArrayList<>();
+    String img;
+    double price;
 
     @ManyToOne
-    Waiter waiter;
+    Type type;
+
+    @ManyToMany(mappedBy = "meals")
+    List<User> users = new ArrayList<>();
+
 
 
 }
+
+
+
+
