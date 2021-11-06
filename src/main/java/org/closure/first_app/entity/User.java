@@ -35,6 +35,7 @@ public class User {
     String name;
     Integer phone;
     double bill;
+    String password;
    
     @ManyToMany
     @JoinTable(name = "user_meals",joinColumns = {@JoinColumn(name = "uid")},inverseJoinColumns = {@JoinColumn(name = "mid")})
