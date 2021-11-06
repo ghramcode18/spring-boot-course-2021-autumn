@@ -11,12 +11,14 @@ public class UserService {
     @Autowired
     UserRepo userRepo;
 
-    public String signin(String phone, String password) throws Exception {
-        return userRepo.findByPhoneAndPassword(Integer.parseInt(phone), password)
-                .orElseThrow(() -> new Exception("no user with this info")).getName();
+    public User signin(Integer phone, String password) throws Exception {
+        return userRepo.findByPhoneAndPassword(phone, password)
+                .orElseThrow(() -> new Exception("no user with this info"));
     }
-    public String signup(User user){
-        user = userRepo.save(user);
-        return user.getName();
+
+    public User signup(User user) throws Exception {
+        if (userRepo.findByPhone(user.getPhone()).isPresent())
+            throw new Exception("this user already exist");
+        return userRepo.save(user);
     }
 }

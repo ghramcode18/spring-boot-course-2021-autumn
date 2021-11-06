@@ -1,0 +1,10 @@
+<html>
+<body>
+    <form action="#" th:action="@{/signin}" th:object="${user}" method="post">
+        <input type="number" th:field="*{phone}" /><br />
+        <input type="password" th:field="*{password}" /><br />
+        <input type="submit" />
+    </form>
+    <a href="register">register new account</a>
+</body>
+</html> 

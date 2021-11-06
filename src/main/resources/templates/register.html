@@ -1,0 +1,11 @@
+<html>
+<body>
+    <form action="#" th:action="@{/signup}" method="post" th:object="${user}">
+       <p>name : </p> <input type="text" th:field="*{name}" /><br />
+        <p>phone : </p> <input type="number" th:field="*{phone}" /><br />
+        <p>bill : </p> <input type="number" th:field="*{bill}" /><br />
+        <p>password : </p> <input type="password" th:field="*{password}" /><br />
+        <input type="submit" name="submit" />
+    </form>
+</body>
+</html> 

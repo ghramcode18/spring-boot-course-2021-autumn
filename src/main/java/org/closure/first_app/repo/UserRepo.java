@@ -9,4 +9,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepo extends JpaRepository<User,Integer>{
     public Optional<User> findByPhoneAndPassword(Integer phone,String password);
+    public Optional<User> findByPhone(Integer phone);
 }

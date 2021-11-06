@@ -19,41 +19,43 @@ public class UserController {
     UserService userService;
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String index() {
+    public String index(User user) {
         return "index";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register() {
+    public String register(User user) {
         return "register";
     }
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String home(@RequestParam(name = "username") String name) {
+    public String home(User user, Model model) {
+        model.addAttribute("user", user);
         return "home";
     }
 
     @RequestMapping(value = "/signin", method = RequestMethod.POST)
-    public String signin(HttpServletRequest request, Model model) throws Exception {
+    public String signin(User user, Model model) throws Exception {
         try {
-            String name = userService.signin(request.getParameter("phone"), request.getParameter("password"));
-            model.addAttribute("username", name);
-            return "redirect:/home";
+            user = userService.signin(user.getPhone(), user.getPassword());
+            model.addAttribute("user", user);
+            return "home";
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
-            return "redirect:/error";
+            return "errorpage";
         }
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public String signup(HttpServletRequest request, Model model) {
-
-        User user = new User().withBill(Integer.parseInt(request.getParameter("bill")))
-                .withName(request.getParameter("name")).withPassword(request.getParameter("password"))
-                .withPhone(Integer.parseInt(request.getParameter("phone")));
-        String name = userService.signup(user);
-        model.addAttribute("username", name);
-        return "redirect:/home";
+    public String signup(User user, Model model) {
+        try {
+            userService.signup(user);
+        } catch (Exception e) {
+         model.addAttribute("error", e.getMessage());
+         return "errorpage";
+        }
+        model.addAttribute("user", user);
+        return "home";
 
     }
 
