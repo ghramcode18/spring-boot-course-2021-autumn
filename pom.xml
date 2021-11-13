@@ -93,7 +93,7 @@
 						<path>
 							<groupId>org.projectlombok</groupId>
 							<artifactId>lombok</artifactId>
-							<version>${org.projectlombok.version}</version>
+							<version>1.18.16</version>
 						</path>
 
 						<!-- additional annotation processor required as of Lombok 1.18.16 -->

@@ -1,6 +1,7 @@
 package org.closure.course.entity;
 
 import java.time.Instant;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,4 +29,5 @@ public class Product {
     String price;
     @JsonIgnore
     Instant createdAt;
+    List<Brand> brand;
 }
