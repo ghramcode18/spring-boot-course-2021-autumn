@@ -1,13 +1,8 @@
 package org.closure.course.entity;
 
-import java.time.Instant;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,13 +16,12 @@ import lombok.With;
 @NoArgsConstructor
 @With
 @Entity
-public class Product {
+public class User {
     @Id
     @GeneratedValue
     Integer id;
-    String name;
-    String price;
-    @JsonIgnore
-    Instant createdAt;
-    
+    String email;
+    String password;
+    String username;
+    boolean active;
 }
