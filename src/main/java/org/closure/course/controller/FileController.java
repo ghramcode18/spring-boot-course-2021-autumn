@@ -27,9 +27,10 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 class FileController {
 
     @PostMapping(path = "/upload")
-    public ResponseEntity uploadToLocalFileSystem(@RequestParam("file") MultipartFile file) {
+    public ResponseEntity<String> uploadToLocalFileSystem(@RequestParam("file") MultipartFile file) {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         Path path = Paths.get(String.format("assets/images/%s", fileName));
+        path.toFile().mkdirs();
         try {
             Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException e) {

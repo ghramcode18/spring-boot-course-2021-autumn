@@ -1,0 +1,16 @@
+<body>
+<Entries xmlns="techno-visions">
+<Entry>
+<id>1001</id>
+<name>anas</name>
+<salary>10000</salary>
+<email>anas@schooldomain.com</email>
+</Entry>
+<Entry>
+<id>1002</id>
+<name>name</name>
+<salary>199999</salary>
+<email>name@schooldomain.com</email>
+</Entry>
+</Entries>
+</body>
