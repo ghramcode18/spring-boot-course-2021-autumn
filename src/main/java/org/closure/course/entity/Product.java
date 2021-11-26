@@ -13,6 +13,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.With;
 
 @Getter
@@ -21,6 +22,7 @@ import lombok.With;
 @NoArgsConstructor
 @With
 @Entity
+@ToString
 public class Product {
     @Id
     @GeneratedValue

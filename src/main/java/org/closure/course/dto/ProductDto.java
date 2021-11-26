@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.With;
 
 @Setter
@@ -17,6 +18,7 @@ import lombok.With;
 @AllArgsConstructor
 @NoArgsConstructor
 @With
+@ToString
 public class ProductDto {
     Integer id;
     String name;
