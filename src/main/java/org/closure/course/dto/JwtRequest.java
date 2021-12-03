@@ -9,15 +9,15 @@ import lombok.Setter;
 import lombok.ToString;
 import lombok.With;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @With
 @ToString
-public class JwtRequest implements Serializable{
-    private static final long serialVersionUID = 5926468583005150707L;
-	
+public class JwtRequest{
+    
 	private String username;
 	private String password;
     
