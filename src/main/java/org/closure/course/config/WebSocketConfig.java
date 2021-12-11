@@ -1,5 +1,6 @@
 package org.closure.course.config;
 
+import org.springframework.boot.context.annotation.Configurations;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;
 import org.springframework.web.socket.config.annotation.EnableWebSocketMessageBroker;
